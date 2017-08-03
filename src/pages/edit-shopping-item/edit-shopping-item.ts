@@ -13,7 +13,6 @@ export class EditShoppingItemPage {
   shoppingItem = {} as ShoppingItem;
   constructor(public navCtrl: NavController, public navParams: NavParams,private database: AngularFireDatabase) {
   const shoppingItemId = this.navParams.get('shoppingItemId');
-  console.log(shoppingItemId);
 
   this.shoppingItemRef$ = this.database.object(`shopping-list/${shoppingItemId}`);
 
@@ -22,10 +21,7 @@ export class EditShoppingItemPage {
   
   editShoppingItem(shoppingItem: ShoppingItem) {
     this.shoppingItemRef$.update(shoppingItem);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditShoppingItemPage');
+    this.navCtrl.pop();
   }
 
 }
