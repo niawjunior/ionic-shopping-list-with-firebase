@@ -9,11 +9,19 @@ import { ShoppingItem } from '../../models/shopping-item/shopping-item.interface
 })
 export class EditShoppingItemPage {
 
-  shoppingItemRef$: FirebaseObjectObservable<ShoppingItem[]>
+  shoppingItemRef$: FirebaseObjectObservable<ShoppingItem>
+  shoppingItem = {} as ShoppingItem;
   constructor(public navCtrl: NavController, public navParams: NavParams,private database: AngularFireDatabase) {
   const shoppingItemId = this.navParams.get('shoppingItemId');
   console.log(shoppingItemId);
+
   this.shoppingItemRef$ = this.database.object(`shopping-list/${shoppingItemId}`);
+
+  this.shoppingItemRef$.subscribe(shoppingItem => this.shoppingItem = shoppingItem);
+  }
+  
+  editShoppingItem(shoppingItem: ShoppingItem) {
+    this.shoppingItemRef$.update(shoppingItem);
   }
 
   ionViewDidLoad() {
