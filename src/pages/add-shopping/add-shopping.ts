@@ -10,12 +10,16 @@ export class AddShoppingPage {
   shoppingItem = {} as ShoppingItem
   shoppingItemRef$: FirebaseListObservable<ShoppingItem[]>
   constructor(public navCtrl: NavController, public navParams: NavParams,private database: AngularFireDatabase) {
-    this.shoppingItemRef$ = this.database.list('shoping-lsit');
+    this.shoppingItemRef$ = this.database.list('shopping-list');
   }
   addShoppingItem(shoppingItem: ShoppingItem) {
     this.shoppingItemRef$.push({
       itemName: this.shoppingItem.itemName,
       itemNumber: Number(this.shoppingItem.itemNumber)
     });
+
+    this.shoppingItem = {} as ShoppingItem;
+
+    this.navCtrl.pop();
   }
 }
