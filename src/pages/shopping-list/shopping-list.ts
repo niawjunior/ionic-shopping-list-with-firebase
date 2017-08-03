@@ -3,7 +3,7 @@ import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 import { AddShoppingPage } from '../add-shopping/add-shopping';
 import { ShoppingItem } from '../../models/shopping-item/shopping-item.interface';
-
+import { EditShoppingItemPage} from '../edit-shopping-item/edit-shopping-item';
 @Component({
   selector: 'page-shopping-list',
   templateUrl: 'shopping-list.html',
@@ -23,7 +23,8 @@ export class ShoppingListPage {
         {
           text: 'Edit',
           handler: () => {
-
+            this.navCtrl.push(EditShoppingItemPage, 
+              { shoppingItemId: shoppingItem.$key });
           }
         },
         {

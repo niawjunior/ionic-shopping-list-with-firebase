@@ -12,6 +12,7 @@ export class EditShoppingItemPage {
   shoppingItemRef$: FirebaseObjectObservable<ShoppingItem[]>
   constructor(public navCtrl: NavController, public navParams: NavParams,private database: AngularFireDatabase) {
   const shoppingItemId = this.navParams.get('shoppingItemId');
+  console.log(shoppingItemId);
   this.shoppingItemRef$ = this.database.object(`shopping-list/${shoppingItemId}`);
   }
 
